@@ -1,0 +1,474 @@
+{% load static yela_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YELA — Rise Youth Development Community</title>
+<meta name="description" content="YELA equips young people across East Africa with skills, networks, and confidence to build better futures.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/yela.css' %}">
+</head>
+<body>
+
+<!-- PRELOADER -->
+<div id="preloader">
+  <img class="preloader-logo" src="{% static 'images/logo.png' %}" alt="YELA">
+  <p>Rise Youth Development Community</p>
+</div>
+
+<!-- CURSOR -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">
+    <img src="{% static 'images/logo.png' %}" alt="YELA">
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#programs">Programs</a></li>
+    <li><a href="{% url 'events' %}">Events</a></li>
+    <li><a href="#impact">Impact</a></li>
+    <li><a href="#team">Team</a></li>
+    <li><a href="#fund">Fund</a></li>
+    <li><a href="{% url 'program_apply' %}" class="nav-cta">Apply</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" class="mobile-link">About</a>
+  <a href="#programs" class="mobile-link">Programs</a>
+  <a href="{% url 'events' %}" class="mobile-link">Events</a>
+  <a href="#impact" class="mobile-link">Impact</a>
+  <a href="#team" class="mobile-link">Team</a>
+  <a href="#fund" class="mobile-link">Fund</a>
+  <a href="{% url 'program_apply' %}" class="mobile-link">Apply</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <img class="hero-photo-bg" src="{% static 'images/WhatsApp Image 2026-06-17 at 1.07.18 PM (1).jpeg' %}" alt="" aria-hidden="true">
+  <div class="hero-bg-circles" aria-hidden="true">
+    <div class="hero-circle"></div>
+    <div class="hero-circle"></div>
+    <div class="hero-circle"></div>
+  </div>
+  <p class="hero-eyebrow">Rise Youth Development Community</p>
+  <h1 class="hero-title">
+    Empowering<br>
+    <em>the next generation</em>
+  </h1>
+  <p class="hero-desc">
+    YELA equips young people across East Africa with the skills, networks,
+    and confidence to build better futures — for themselves and their communities.
+  </p>
+  <div class="hero-actions">
+    <a href="#programs" class="btn-primary">Explore Programs ↓</a>
+    <a href="#contact" class="btn-ghost">Volunteer With Us</a>
+  </div>
+  <div class="hero-scroll" aria-hidden="true">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-bar" aria-hidden="true">
+  <div class="marquee-track">
+    {% for item in "Youth Leadership,Digital Skills,Entrepreneurship,Creative Arts,Civic Engagement,Mentorship,Community Impact,Youth Leadership,Digital Skills,Entrepreneurship,Creative Arts,Civic Engagement,Mentorship,Community Impact"|split:"," %}
+    <div class="marquee-item"><div class="marquee-dot"></div>{{ item }}</div>
+    {% endfor %}
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-visual reveal-left">
+      <div class="about-img-block">
+        <img class="about-photo" src="{% static 'images/WhatsApp Image 2026-06-17 at 1.07.20 PM.jpeg' %}" alt="YELA youth leadership session with students">
+        <div class="about-img-overlay">
+          <div class="about-big-sun"></div>
+          <p class="about-quote">"Every young person deserves the chance to rise."</p>
+        </div>
+      </div>
+      <div class="about-accent"></div>
+    </div>
+    <div class="about-content reveal-right">
+      <p class="section-eyebrow">Who We Are</p>
+      <h2 class="section-title">Building young leaders who transform communities</h2>
+      <p class="section-lead">
+        Founded on the belief that youth are not just the future — they are the present,
+        YELA works with young people aged 15–30 to unlock their potential through
+        education, mentorship, and hands-on experience.
+      </p>
+      <div class="about-cards">
+        <div class="about-card">
+          <h3>Our Mission</h3>
+          <p>To develop confident, skilled, and socially conscious youth who drive positive change in their communities and beyond.</p>
+        </div>
+        <div class="about-card">
+          <h3>Our Vision</h3>
+          <p>A generation of empowered young Africans leading sustainable development and innovation across East Africa.</p>
+        </div>
+        <div class="about-card">
+          <h3>Our Values</h3>
+          <p>Integrity, Inclusion, Excellence, Community, and the belief that every young person has the power to rise.</p>
+        </div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-card">
+          <div class="stat-num"><span id="stat1">0</span><span>+</span></div>
+          <div class="stat-label">Youth Served</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num"><span id="stat2">0</span></div>
+          <div class="stat-label">Programs Active</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num"><span id="stat3">0</span><span>+</span></div>
+          <div class="stat-label">Mentors</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMS -->
+<section id="programs">
+  <div class="reveal" style="text-align:center">
+    <p class="section-eyebrow">What We Do</p>
+    <h2 class="section-title">Programs built to unlock potential</h2>
+  </div>
+  <div class="programs-grid">
+    {% for program in programs %}
+    <div class="program-card reveal">
+      <div class="program-icon">{{ program.icon }}</div>
+      <h3>{{ program.title }}</h3>
+      <p>{{ program.description }}</p>
+      <span class="program-tag">{{ program.tag }}</span>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- IMPACT -->
+<section id="impact">
+  <div class="impact-inner">
+    <p class="section-eyebrow">Our Impact</p>
+    <h2 class="section-title light">Numbers tell part of the story</h2>
+    <p class="section-lead light" style="margin:0 auto;text-align:center">
+      Since our founding, YELA has reached young people across Tanzania and beyond —
+      creating ripples of change in families, schools, and communities.
+    </p>
+    <div class="impact-nums reveal">
+      <div class="impact-item">
+        <div class="impact-num"><span class="counter" data-target="1200">0</span><span class="impact-suffix">+</span></div>
+        <div class="impact-label">Youth Reached</div>
+      </div>
+      <div class="impact-item">
+        <div class="impact-num"><span class="counter" data-target="6">0</span></div>
+        <div class="impact-label">Active Programs</div>
+      </div>
+      <div class="impact-item">
+        <div class="impact-num"><span class="counter" data-target="48">0</span><span class="impact-suffix">+</span></div>
+        <div class="impact-label">Mentors & Volunteers</div>
+      </div>
+      <div class="impact-item">
+        <div class="impact-num"><span class="counter" data-target="5">0</span></div>
+        <div class="impact-label">Years of Service</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div style="text-align:center" class="reveal">
+    <p class="section-eyebrow">Voices of Change</p>
+    <h2 class="section-title">What our community says</h2>
+  </div>
+  <div class="testimonials-wrap reveal">
+    <div class="testimonials-track" id="testiTrack">
+      {% for t in testimonials %}
+      <div class="testimonial-slide">
+        <div class="testimonial-card">
+          <p class="testimonial-text">{{ t.quote }}</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">{{ t.initials }}</div>
+            <div>
+              <div class="author-name">{{ t.name }}</div>
+              <div class="author-role">{{ t.role }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="testi-dots" id="testiDots">
+      {% for t in testimonials %}
+      <button class="testi-dot {% if forloop.first %}active{% endif %}" data-idx="{{ forloop.counter0 }}" aria-label="Slide {{ forloop.counter }}"></button>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team">
+  <div style="text-align:center" class="reveal">
+    <p class="section-eyebrow">Who Drives Us</p>
+    <h2 class="section-title">Meet the team</h2>
+  </div>
+  <div class="team-grid">
+    <div class="team-card reveal">
+      <div class="team-photo">
+        <img src="{% static 'images/mwanamvua-nuru.jpeg' %}" alt="Mwanamvua Nuru">
+      </div>
+      <div class="team-info">
+        <div class="team-name">Mwanamvua Nuru</div>
+        <div class="team-role">Managing Director</div>
+      </div>
+    </div>
+    <div class="team-card reveal">
+      <div class="team-photo">
+        <img src="{% static 'images/alex-gwantwa-mwakijungu.jpeg' %}" alt="Adv. Alex Gwantwa Mwakijungu">
+      </div>
+      <div class="team-info">
+        <div class="team-name">Adv. Alex Gwantwa Mwakijungu</div>
+        <div class="team-role">Board Chairman</div>
+      </div>
+    </div>
+    <div class="team-card reveal">
+      <div class="team-photo">
+        <img src="{% static 'images/Rashid Hassan Mponda.jpeg' %}" alt="Rashid Hassan Mponda">
+      </div>
+      <div class="team-info">
+        <div class="team-name">Rashid Hassan Mponda</div>
+        <div class="team-role">Communication Officer</div>
+      </div>
+    </div>
+    <div class="team-card reveal">
+      <div class="team-photo">
+        <img src="{% static 'images/Said Mohammed balande.jpeg' %}" alt="Said Mohammed Balande">
+      </div>
+      <div class="team-info">
+        <div class="team-name">Said Mohammed Balande</div>
+        <div class="team-role">Project Manager and Founder</div>
+      </div>
+    </div>
+    <div class="team-card reveal">
+      <div class="team-photo">
+        <img src="{% static 'images/sabrina.jpeg' %}" alt="Sabrina Benjamin">
+      </div>
+      <div class="team-info">
+        <div class="team-name">Sabrina Benjamin</div>
+        <div class="team-role">Accountant</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div style="text-align:center" class="reveal">
+    <p class="section-eyebrow">Our Community</p>
+    <h2 class="section-title">Moments of growth</h2>
+  </div>
+  <div class="gallery-grid">
+    <div class="gallery-item">
+      <img src="{% static 'images/WhatsApp Image 2026-06-17 at 1.07.27 PM.jpeg' %}" alt="YELA leadership workshop in a classroom">
+      <div class="gallery-inner">
+        <span class="gallery-decor">01</span>
+        <div class="gallery-label">Leadership Workshop</div>
+      </div>
+    </div>
+    <div class="gallery-item">
+      <img src="{% static 'images/WhatsApp Image 2026-06-17 at 1.07.28 PM.jpeg' %}" alt="Student speaking during a YELA classroom session">
+      <div class="gallery-inner">
+        <span class="gallery-decor">02</span>
+        <div class="gallery-label">Student Voices</div>
+      </div>
+    </div>
+    <div class="gallery-item">
+      <img src="{% static 'images/WhatsApp Image 2026-06-17 at 1.07.19 PM (1).jpeg' %}" alt="YELA team members outdoors">
+      <div class="gallery-inner">
+        <span class="gallery-decor">03</span>
+        <div class="gallery-label">Youth Team</div>
+      </div>
+    </div>
+    <div class="gallery-item">
+      <img src="{% static 'images/WhatsApp Image 2026-06-17 at 1.07.29 PM (1).jpeg' %}" alt="Community event audience seated in a hall">
+      <div class="gallery-inner">
+        <span class="gallery-decor">04</span>
+        <div class="gallery-label">Community Day</div>
+      </div>
+    </div>
+    <div class="gallery-item">
+      <img src="{% static 'images/WhatsApp Image 2026-06-17 at 1.07.26 PM.jpeg' %}" alt="YELA facilitator speaking with students">
+      <div class="gallery-inner">
+        <span class="gallery-decor">05</span>
+        <div class="gallery-label">Mentorship Session</div>
+      </div>
+    </div>
+    <div class="gallery-item">
+      <img src="{% static 'images/WhatsApp Image 2026-06-17 at 1.07.18 PM (2).jpeg' %}" alt="YELA participant during an activity">
+      <div class="gallery-inner">
+        <span class="gallery-decor">06</span>
+        <div class="gallery-label">Program Moments</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERS -->
+<section id="partners">
+  <div style="text-align:center" class="reveal">
+    <p class="section-eyebrow">Supported By</p>
+    <h2 class="section-title">Our partners & supporters</h2>
+  </div>
+  <div class="partners-track-wrap">
+    <div class="partners-track">
+      {% for name in "UNICEF Tanzania,British Council,Aga Khan Foundation,GIZ Tanzania,African Development Bank,Tony Elumelu Foundation,UNFPA,UNICEF Tanzania,British Council,Aga Khan Foundation,GIZ Tanzania,African Development Bank,Tony Elumelu Foundation,UNFPA"|split:"," %}
+      <div class="partner-chip">{{ name }}</div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- FUND -->
+<section id="fund">
+  <div class="fund-inner">
+    <div class="fund-copy reveal-left">
+      <p class="section-eyebrow">Support The Work</p>
+      <h2 class="section-title">Fund youth programs through YELA</h2>
+      <p class="section-lead">
+        Your contribution helps cover program delivery, mentorship, community outreach,
+        and operational support for young people across our network.
+      </p>
+    </div>
+    <div class="fund-card reveal-right">
+      <div class="fund-card-header">
+        <span class="fund-card-kicker">Payment Method</span>
+        <h3>Bank Transfer</h3>
+      </div>
+      <dl class="fund-details">
+        <div>
+          <dt>Account Name</dt>
+          <dd>YELA</dd>
+        </div>
+        <div>
+          <dt>Bank</dt>
+          <dd>CRDB Bank</dd>
+        </div>
+        <div>
+          <dt>Account Number</dt>
+          <dd>015C0003PXM00</dd>
+        </div>
+      </dl>
+      <a href="#contact" class="btn-primary fund-button">Confirm Support →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <p class="section-eyebrow" style="color:var(--saffron)">Join The Movement</p>
+    <h2 class="section-title light">Ready to make a difference?</h2>
+    <p class="section-lead light" style="text-align:center;margin-top:16px">
+      Whether you want to volunteer, partner, or support our work — we'd love to hear from you.
+    </p>
+
+    {% if messages %}
+      {% for message in messages %}
+      <div class="django-message">✦ {{ message }}</div>
+      {% endfor %}
+    {% endif %}
+
+    <div class="contact-form-box reveal">
+      <form method="post" action="#contact" novalidate>
+        {% csrf_token %}
+        <div class="form-row">
+          <div class="form-group">
+            <label for="{{ form.first_name.id_for_label }}">First name</label>
+            {{ form.first_name }}
+            {% if form.first_name.errors %}<div class="form-error">{{ form.first_name.errors.0 }}</div>{% endif %}
+          </div>
+          <div class="form-group">
+            <label for="{{ form.last_name.id_for_label }}">Last name</label>
+            {{ form.last_name }}
+            {% if form.last_name.errors %}<div class="form-error">{{ form.last_name.errors.0 }}</div>{% endif %}
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="{{ form.email.id_for_label }}">Email address</label>
+          {{ form.email }}
+          {% if form.email.errors %}<div class="form-error">{{ form.email.errors.0 }}</div>{% endif %}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.interest.id_for_label }}">I want to</label>
+          {{ form.interest }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.message.id_for_label }}">Message</label>
+          {{ form.message }}
+          {% if form.message.errors %}<div class="form-error">{{ form.message.errors.0 }}</div>{% endif %}
+        </div>
+        <button type="submit" class="btn-primary form-submit">Send Message →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="logo"><img src="{% static 'images/logo.png' %}" alt="YELA"></div>
+      <p>Rise Youth Development Community — equipping young East Africans to lead, create, and transform their world.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navigate</h4>
+      <a href="#about">About Us</a>
+      <a href="#programs">Programs</a>
+      <a href="{% url 'events' %}">Events</a>
+      <a href="#impact">Impact</a>
+      <a href="#team">Team</a>
+      <a href="#fund">Fund</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4>Programs</h4>
+      {% for program in programs %}
+      <a href="#">{{ program.title }}</a>
+      {% endfor %}
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <a href="mailto:info@yela.or.tz">info@yela.or.tz</a>
+      <a href="tel:+255777558559">0777 558559</a>
+      <a href="#">Arusha, Tanzania</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© {% now "Y" %} YELA — Rise Youth Development Community. All rights reserved.</p>
+    <div class="social-links">
+      <a href="#" aria-label="Facebook">f</a>
+      <a href="#" aria-label="Instagram">in</a>
+      <a href="#" aria-label="Twitter">𝕏</a>
+      <a href="#" aria-label="LinkedIn">li</a>
+    </div>
+  </div>
+</footer>
+
+<script src="{% static 'js/yela.js' %}"></script>
+</body>
+</html>

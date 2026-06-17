@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apply for Programs — YELA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/yela.css' %}">
+</head>
+<body class="standard-cursor">
+<nav id="navbar" class="scrolled">
+  <a href="{% url 'home' %}" class="nav-logo"><img src="{% static 'images/logo.png' %}" alt="YELA"></a>
+  <ul class="nav-links">
+    <li><a href="{% url 'home' %}">Home</a></li>
+    <li><a href="{% url 'home' %}#programs">Programs</a></li>
+    <li><a href="{% url 'events' %}">Events</a></li>
+    <li><a href="{% url 'student_logout' %}" class="nav-cta">Logout</a></li>
+  </ul>
+</nav>
+
+<main class="dashboard-shell">
+  <section class="dashboard-head">
+    <p class="section-eyebrow">Program Applications</p>
+    <h1 class="section-title">Welcome, {{ request.user.first_name|default:request.user.username }}</h1>
+    <p class="section-lead">Choose a program, tell us why you want to join, and our team will review your application.</p>
+  </section>
+
+  {% if messages %}
+    {% for message in messages %}
+    <div class="dashboard-message">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+
+  <section class="dashboard-grid">
+    <form method="post" class="application-form">
+      {% csrf_token %}
+      {% if form.non_field_errors %}<div class="form-error auth-error">{{ form.non_field_errors.0 }}</div>{% endif %}
+      <div class="form-group">
+        <label for="{{ form.program.id_for_label }}">Program</label>
+        {{ form.program }}
+        {% if form.program.errors %}<div class="form-error">{{ form.program.errors.0 }}</div>{% endif %}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.motivation.id_for_label }}">Why do you want to join?</label>
+        {{ form.motivation }}
+        {% if form.motivation.errors %}<div class="form-error">{{ form.motivation.errors.0 }}</div>{% endif %}
+      </div>
+      <button class="btn-primary form-submit" type="submit">Submit Application →</button>
+    </form>
+
+    <div class="applications-list">
+      <h2>Your applications</h2>
+      {% for application in applications %}
+      <div class="application-item">
+        <div>
+          <strong>{{ application.program.title }}</strong>
+          <span>{{ application.created_at|date:"M d, Y" }}</span>
+        </div>
+        <span class="application-status">{{ application.get_status_display }}</span>
+      </div>
+      {% empty %}
+      <p class="empty-copy">You have not submitted an application yet.</p>
+      {% endfor %}
+    </div>
+  </section>
+</main>
+</body>
+</html>

@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Registration — YELA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/yela.css' %}">
+</head>
+<body class="standard-cursor">
+<nav id="navbar" class="scrolled">
+  <a href="{% url 'home' %}" class="nav-logo"><img src="{% static 'images/logo.png' %}" alt="YELA"></a>
+  <ul class="nav-links">
+    <li><a href="{% url 'home' %}">Home</a></li>
+    <li><a href="{% url 'home' %}#programs">Programs</a></li>
+    <li><a href="{% url 'events' %}">Events</a></li>
+    <li><a href="{% url 'student_login' %}" class="nav-cta">Login</a></li>
+  </ul>
+</nav>
+
+<main class="auth-shell">
+  <section class="auth-panel">
+    <div class="auth-copy">
+      <p class="section-eyebrow">Student Account</p>
+      <h1 class="section-title light">Register for YELA programs</h1>
+      <p class="section-lead light">Create an account so you can apply for programs and keep your details ready for upcoming opportunities.</p>
+    </div>
+    <form method="post" class="auth-form" novalidate>
+      {% csrf_token %}
+      {% if form.non_field_errors %}<div class="form-error auth-error">{{ form.non_field_errors.0 }}</div>{% endif %}
+      <div class="form-row">
+        <div class="form-group">
+          <label for="{{ form.first_name.id_for_label }}">First name</label>
+          {{ form.first_name }}
+          {% if form.first_name.errors %}<div class="form-error">{{ form.first_name.errors.0 }}</div>{% endif %}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.last_name.id_for_label }}">Last name</label>
+          {{ form.last_name }}
+          {% if form.last_name.errors %}<div class="form-error">{{ form.last_name.errors.0 }}</div>{% endif %}
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="{{ form.email.id_for_label }}">Email</label>
+          {{ form.email }}
+          {% if form.email.errors %}<div class="form-error">{{ form.email.errors.0 }}</div>{% endif %}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.phone.id_for_label }}">Phone</label>
+          {{ form.phone }}
+          {% if form.phone.errors %}<div class="form-error">{{ form.phone.errors.0 }}</div>{% endif %}
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="{{ form.username.id_for_label }}">Username</label>
+          {{ form.username }}
+          {% if form.username.errors %}<div class="form-error">{{ form.username.errors.0 }}</div>{% endif %}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.age.id_for_label }}">Age</label>
+          {{ form.age }}
+          {% if form.age.errors %}<div class="form-error">{{ form.age.errors.0 }}</div>{% endif %}
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="{{ form.location.id_for_label }}">Location</label>
+        {{ form.location }}
+        {% if form.location.errors %}<div class="form-error">{{ form.location.errors.0 }}</div>{% endif %}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.school_or_organization.id_for_label }}">School or organization</label>
+        {{ form.school_or_organization }}
+        {% if form.school_or_organization.errors %}<div class="form-error">{{ form.school_or_organization.errors.0 }}</div>{% endif %}
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="{{ form.password1.id_for_label }}">Password</label>
+          {{ form.password1 }}
+          {% if form.password1.errors %}<div class="form-error">{{ form.password1.errors.0 }}</div>{% endif %}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.password2.id_for_label }}">Confirm password</label>
+          {{ form.password2 }}
+          {% if form.password2.errors %}<div class="form-error">{{ form.password2.errors.0 }}</div>{% endif %}
+        </div>
+      </div>
+      <button class="btn-primary form-submit" type="submit">Create Account →</button>
+      <p class="auth-alt">Already registered? <a href="{% url 'student_login' %}">Login</a></p>
+    </form>
+  </section>
+</main>
+</body>
+</html>

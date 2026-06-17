@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Upcoming Events — YELA</title>
+<meta name="description" content="Upcoming YELA events for students and youth.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/yela.css' %}">
+</head>
+<body class="standard-cursor">
+<nav id="navbar" class="scrolled">
+  <a href="{% url 'home' %}" class="nav-logo"><img src="{% static 'images/logo.png' %}" alt="YELA"></a>
+  <ul class="nav-links">
+    <li><a href="{% url 'home' %}">Home</a></li>
+    <li><a href="{% url 'home' %}#about">About</a></li>
+    <li><a href="{% url 'home' %}#programs">Programs</a></li>
+    <li><a href="{% url 'events' %}">Events</a></li>
+    <li><a href="{% url 'home' %}#fund">Fund</a></li>
+    <li><a href="{% url 'program_apply' %}" class="nav-cta">Apply</a></li>
+  </ul>
+</nav>
+
+<main class="page-shell">
+  <section class="page-hero events-hero">
+    <img src="{% static 'images/WhatsApp Image 2026-06-17 at 1.07.29 PM (1).jpeg' %}" alt="" aria-hidden="true">
+    <div class="page-hero-content">
+      <p class="section-eyebrow">Upcoming Events</p>
+      <h1 class="section-title light">Programs, workshops, and youth gatherings we are planning</h1>
+      <p class="section-lead light">Browse what is coming next and register your interest early.</p>
+    </div>
+  </section>
+
+  <section class="events-list-section">
+    <div class="events-grid">
+      {% for event in events %}
+      <article class="event-card reveal">
+        {% if event.image %}
+        <img class="event-card-img" src="{{ event.image.url }}" alt="{{ event.title }}">
+        {% else %}
+        <img class="event-card-img" src="{% static 'images/WhatsApp Image 2026-06-17 at 1.07.27 PM.jpeg' %}" alt="{{ event.title }}">
+        {% endif %}
+        <div class="event-card-body">
+          <time class="event-date" datetime="{{ event.event_date|date:'Y-m-d' }}">{{ event.event_date|date:"M d, Y" }}{% if event.event_time %} · {{ event.event_time|time:"g:i A" }}{% endif %}</time>
+          <h2>{{ event.title }}</h2>
+          <p>{{ event.description }}</p>
+          <div class="event-venue">{{ event.venue }}</div>
+          {% if event.registration_link %}
+          <a class="btn-primary" href="{{ event.registration_link }}" target="_blank" rel="noopener">Register Interest →</a>
+          {% else %}
+          <a class="btn-primary" href="{% url 'student_register' %}">Create Student Account →</a>
+          {% endif %}
+        </div>
+      </article>
+      {% empty %}
+      <div class="empty-state">
+        <h2>No events posted yet</h2>
+        <p>Check back soon for new workshops and community sessions.</p>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+</main>
+
+<script src="{% static 'js/yela.js' %}"></script>
+</body>
+</html>
