@@ -4,8 +4,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Upcoming Events — YELA</title>
-<meta name="description" content="Upcoming YELA events for students and youth.">
+<title>Events — YELA</title>
+<meta name="description" content="YELA past events and continuing youth programs.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
@@ -28,38 +28,67 @@
   <section class="page-hero events-hero">
     <img src="{% static 'images/WhatsApp Image 2026-06-17 at 1.07.29 PM (1).jpeg' %}" alt="" aria-hidden="true">
     <div class="page-hero-content">
-      <p class="section-eyebrow">Upcoming Events</p>
-      <h1 class="section-title light">Programs, workshops, and youth gatherings we are planning</h1>
-      <p class="section-lead light">Browse what is coming next and register your interest early.</p>
+      <p class="section-eyebrow">YELA Events</p>
+      <h1 class="section-title light">Past programs with continuing community impact</h1>
+      <p class="section-lead light">Explore YELA programs that have engaged young people across Tanzania through education, mentorship, sport, and life skills.</p>
     </div>
   </section>
 
-  <section class="events-list-section">
-    <div class="events-grid">
-      {% for event in events %}
-      <article class="event-card reveal">
-        {% if event.image %}
-        <img class="event-card-img" src="{{ event.image.url }}" alt="{{ event.title }}">
-        {% else %}
-        <img class="event-card-img" src="{% static 'images/WhatsApp Image 2026-06-17 at 1.07.27 PM.jpeg' %}" alt="{{ event.title }}">
-        {% endif %}
-        <div class="event-card-body">
-          <time class="event-date" datetime="{{ event.event_date|date:'Y-m-d' }}">{{ event.event_date|date:"M d, Y" }}{% if event.event_time %} · {{ event.event_time|time:"g:i A" }}{% endif %}</time>
-          <h2>{{ event.title }}</h2>
-          <p>{{ event.description }}</p>
-          <div class="event-venue">{{ event.venue }}</div>
-          {% if event.registration_link %}
-          <a class="btn-primary" href="{{ event.registration_link }}" target="_blank" rel="noopener">Register Interest →</a>
+  <section class="past-events-section">
+    <div class="events-section-head">
+      <p class="section-eyebrow">Past Events</p>
+      <h2 class="section-title">Programs with continuing impact</h2>
+    </div>
+    <div class="past-events-grid">
+      {% for past_event in past_events %}
+      <article class="past-event-card reveal">
+        <div class="past-event-media">
+          {% if past_event.images %}
+          <div class="past-event-slider slides-{{ past_event.images|length }}" aria-label="{{ past_event.title }} photo gallery">
+            <div class="past-event-track">
+              {% for image in past_event.images %}
+              {% static image as event_image %}
+              <img src="{{ event_image }}" alt="{{ past_event.title }} program photo">
+              {% endfor %}
+              {% for image in past_event.images %}
+              {% static image as event_image %}
+              <img src="{{ event_image }}" alt="" aria-hidden="true">
+              {% endfor %}
+            </div>
+          </div>
           {% else %}
-          <a class="btn-primary" href="{% url 'student_register' %}">Create Student Account →</a>
+          {% static past_event.image as past_image %}
+          <img class="past-event-single-img" src="{{ past_image }}" alt="{{ past_event.title }} youth engagement program">
           {% endif %}
+          <span class="event-badge">{{ past_event.badge }}</span>
+        </div>
+        <div class="past-event-copy">
+          <p class="event-date">{{ past_event.kicker }}</p>
+          <h2>{{ past_event.title }}</h2>
+          <p>{{ past_event.description }}</p>
+          <div class="event-venue">{{ past_event.venue }}</div>
+
+          <div class="event-detail-grid">
+            <div>
+              <h3>Key Objectives</h3>
+              <ul>
+                {% for objective in past_event.objectives %}
+                <li>{{ objective }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+            <div>
+              <h3>{{ past_event.continuity_heading|default:"Why It Continues" }}</h3>
+              <ul>
+                {% for item in past_event.continuity %}
+                <li>{{ item }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+          <p class="past-event-note">{{ past_event.note|default:"The YELA Football Cup continues to grow in reach, visibility, and impact, uniting sports and social change in a practical community platform." }}</p>
         </div>
       </article>
-      {% empty %}
-      <div class="empty-state">
-        <h2>No events posted yet</h2>
-        <p>Check back soon for new workshops and community sessions.</p>
-      </div>
       {% endfor %}
     </div>
   </section>

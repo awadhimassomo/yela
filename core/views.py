@@ -60,11 +60,187 @@ def home(request):
 
 
 def events(request):
-    events_qs = Event.objects.filter(is_active=True)
-    if not events_qs.exists():
-        _seed_events()
-        events_qs = Event.objects.filter(is_active=True)
-    return render(request, 'core/events.html', {'events': events_qs})
+    past_events = [
+        {
+            'title': 'YELA Football Cup',
+            'kicker': 'Continuing Youth Engagement Program',
+            'badge': 'Annual Program',
+            'description': (
+                'The YELA Football Cup is an ongoing annual program that uses sports, '
+                'especially football, as a powerful platform to engage young people and '
+                'raise awareness on key issues affecting their lives. It is part of '
+                'YELA\'s long-term strategy to empower youth and build stronger, healthier, '
+                'and more informed communities across Tanzania.'
+            ),
+            'venue': 'Kijitonyama, Dar es Salaam and expanding districts',
+            'image': 'images/football.jpeg',
+            'images': [
+                'images/football.jpeg',
+                'images/football2.jpeg',
+                'images/Football3.jpeg',
+            ],
+            'objectives': [
+                'Promote youth participation in civic education and leadership',
+                'Provide sexual and reproductive health and mental health education',
+                'Raise awareness on gender-based violence and advocate for gender equality',
+                'Inspire entrepreneurship and economic empowerment',
+                'Strengthen community unity, peace, and inclusion through sport',
+            ],
+            'continuity': [
+                'Held annually and expanding to reach more districts and regions',
+                'Creates a sustainable platform for community mobilization and education',
+                'Engages local stakeholders and private sector sponsors to support youth causes',
+                'Builds lasting opportunities for talent development, life skills, and behavior change',
+            ],
+        },
+        {
+            'title': 'Direction Hub Program',
+            'kicker': 'Practical Business & Life Skills Training',
+            'badge': '2-Day Training',
+            'description': (
+                'Direction Hub is one of YELA\'s flagship empowerment programs, designed '
+                'to equip young entrepreneurs, especially municipal loan recipients, with '
+                'the knowledge and skills needed to run sustainable businesses and make '
+                'informed life choices.'
+            ),
+            'venue': 'Most recent session: Kibaha District, Pwani Region',
+            'image': 'images/training2.jpeg',
+            'images': [
+                'images/training2.jpeg',
+                'images/training.jpeg',
+                'images/training3.jpeg',
+                'images/training 5.jpeg',
+                'images/trainnng4.jpeg',
+                'images/tranning6.jpeg',
+            ],
+            'objectives': [
+                'Train 300 young boys and girls from diverse backgrounds',
+                'Support proper use of municipal and youth loans',
+                'Build marketing, sales, and customer engagement skills',
+                'Strengthen basic business management and financial literacy',
+                'Develop leadership and accountability in entrepreneurship',
+            ],
+            'continuity_heading': 'Program Focus',
+            'continuity': [
+                'Understanding the effects of mixing love and business',
+                'Building professional boundaries in youth-led ventures',
+                'Using real-life examples, guided dialogue, and mentorship',
+                'Helping participants grow profitable businesses and take charge of their futures',
+            ],
+            'note': (
+                'The most recent Direction Hub session was successfully conducted in Kibaha '
+                'District, reaching young people with practical, hands-on coaching.'
+            ),
+        },
+        {
+            'title': '20 Partners Project',
+            'kicker': 'SRH & Relationship Education',
+            'badge': '40 Youth Reached',
+            'description': (
+                'The 20 Partners Project promotes sexual and reproductive health education '
+                'among young people in informal relationships. It creates a structured space '
+                'for youth to learn, ask questions, and make safer, more informed decisions.'
+            ),
+            'venue': 'Selected participants from different communities',
+            'image': 'images/relations4.jpeg',
+            'images': [
+                'images/relations4.jpeg',
+                'images/relations5.jpeg',
+                'images/relation.jpeg',
+                'images/relation3.jpeg',
+            ],
+            'objectives': [
+                'Engage 20 boys and 20 girls from different communities',
+                'Educate young people in informal partnerships through structured sessions',
+                'Promote safe relationships, consent, and SRH rights',
+                'Strengthen knowledge on family planning and STI prevention',
+                'Improve communication and respectful decision-making in relationships',
+            ],
+            'continuity_heading': 'Program Goal',
+            'continuity': [
+                'Reduce sexual and reproductive health risks among young people',
+                'Empower youth to make informed relationship and health decisions',
+                'Promote respectful, informed, and accountable youth relationships',
+                'Create space for honest dialogue on consent, rights, and responsibility',
+            ],
+            'note': (
+                'Through SRH education and relationship dialogue, the project supports young '
+                'people to build healthier partnerships and protect their futures.'
+            ),
+        },
+        {
+            'title': 'Going Beyond Project',
+            'kicker': 'Digital, Entrepreneurial & Life Skills',
+            'badge': 'Youth Skills',
+            'description': (
+                'Going Beyond Project aimed to equip youth with digital, entrepreneurial, '
+                'and life skills to help them thrive in today\'s changing economy. It '
+                'specifically targeted underserved youth, especially young women, preparing '
+                'them for success in the digital and entrepreneurial world.'
+            ),
+            'venue': 'YELA host organization and local community outreach spaces',
+            'image': 'images/training 5.jpeg',
+            'images': [
+                'images/training 5.jpeg',
+                'images/training2.jpeg',
+                'images/WhatsApp Image 2026-06-17 at 1.07.18 PM.jpeg',
+            ],
+            'objectives': [
+                'Provide a safe and inclusive space for program delivery',
+                'Support outreach and youth mobilization in local communities',
+                'Facilitate mentorship and coaching sessions',
+                'Help track progress and impact among participating youth',
+            ],
+            'continuity_heading': 'Focus Areas',
+            'continuity': [
+                'Digital literacy and technology for business',
+                'Entrepreneurship and innovation',
+                'Financial literacy and saving culture',
+                'Confidence and leadership building for young women',
+            ],
+            'note': (
+                'As the host organization, YELA helped create the structure, mentorship, '
+                'and community connection needed for underserved youth to build practical skills.'
+            ),
+        },
+        {
+            'title': 'Climate Action Project',
+            'kicker': 'Environmental Conservation & Sustainability',
+            'badge': 'Climate Action',
+            'description': (
+                'The Climate Action Project engages young people in practical environmental '
+                'stewardship, connecting climate education with hands-on community action. '
+                'Through tree planting, awareness sessions, and local mobilization, youth '
+                'learn how their choices can protect the environment and strengthen community resilience.'
+            ),
+            'venue': 'Community green spaces and local learning sites',
+            'image': 'images/env.jpeg',
+            'images': [
+                'images/env.jpeg',
+                'images/env2.jpg',
+                'images/evn3.jpg',
+            ],
+            'objectives': [
+                'Promote youth participation in climate action and environmental stewardship',
+                'Support tree planting and community greening activities',
+                'Raise awareness on waste management and sustainable daily practices',
+                'Build responsibility for protecting shared community spaces',
+                'Encourage youth-led environmental leadership and advocacy',
+            ],
+            'continuity_heading': 'Program Focus',
+            'continuity': [
+                'Climate education linked to practical action',
+                'Tree planting and care for green spaces',
+                'Community mobilization around sustainability',
+                'Youth leadership in environmental protection',
+            ],
+            'note': (
+                'The project helps young people turn climate awareness into visible community '
+                'action, building greener and more resilient neighborhoods.'
+            ),
+        },
+    ]
+    return render(request, 'core/events.html', {'past_events': past_events})
 
 
 def student_register(request):
@@ -138,7 +314,7 @@ def _seed_testimonials():
         {'name': 'James Kibet', 'role': 'Digital Skills Hub Graduate',
          'initials': 'JK', 'order': 2,
          'quote': 'The Digital Skills Hub gave me the tools to start my own freelance design business. I now earn a living doing what I love, and I am training other youth in my village.'},
-        {'name': 'Sarah Ndago', 'role': 'YELA Mentor, Arusha Chapter',
+        {'name': 'Sarah Ndago', 'role': 'YELA Mentor, Dar es Salaam Chapter',
          'initials': 'SN', 'order': 3,
          'quote': 'As a mentor with YELA, I get more than I give. Watching these young people grow their confidence and pursue their dreams is the most fulfilling work I have ever done.'},
     ]
@@ -159,21 +335,25 @@ def _seed_team():
 
 def _seed_programs():
     data = [
-        {'title': 'Youth Leadership Academy', 'icon': '🌟', 'tag': '6 months', 'order': 1,
-         'description': 'A six-month intensive programme developing the next generation of community leaders through workshops, projects, and peer learning.'},
-        {'title': 'Digital Skills Hub', 'icon': '💻', 'tag': 'Ongoing cohorts', 'order': 2,
-         'description': 'Equipping young people with practical tech skills — from digital literacy to coding, design, and online entrepreneurship.'},
-        {'title': 'Youth Entrepreneurship', 'icon': '🚀', 'tag': 'Funding available', 'order': 3,
-         'description': 'Helping young entrepreneurs turn ideas into viable businesses through training, seed funding, and expert mentorship.'},
-        {'title': 'Creative Arts Initiative', 'icon': '🎨', 'tag': 'Year-round', 'order': 4,
-         'description': 'Using art, music, and performance as tools for self-expression, healing, and social advocacy among young people.'},
-        {'title': 'Civic Engagement', 'icon': '🗳️', 'tag': 'Community based', 'order': 5,
-         'description': 'Training young citizens to actively participate in governance, advocate for their rights, and engage with local leadership.'},
-        {'title': 'Mentorship Network', 'icon': '🤝', 'tag': '1-on-1 matching', 'order': 6,
-         'description': 'Connecting youth with experienced professionals and leaders who guide them through career and personal development journeys.'},
+        {'title': 'Youth Empowerment', 'icon': '🌟', 'tag': 'Skills & opportunity', 'order': 1,
+         'description': 'We empower young people through skills development, entrepreneurship, employability initiatives, civic engagement, and access to opportunities that enable them to become active contributors to their communities and society.'},
+        {'title': 'Leadership Skills Development', 'icon': '🧭', 'tag': 'Training & mentorship', 'order': 2,
+         'description': 'We nurture ethical, responsible, and visionary leaders by providing leadership training, mentorship, civic education, and opportunities for meaningful participation in decision-making processes.'},
+        {'title': 'Health Awareness', 'icon': '💚', 'tag': 'Well-being', 'order': 3,
+         'description': 'We promote healthy lifestyles by raising awareness on physical and mental health, sexual and reproductive health, nutrition, disease prevention, and overall well-being among young people and communities.'},
+        {'title': 'Women and Gender Equality', 'icon': '♀️', 'tag': 'Empowerment', 'order': 4,
+         'description': 'We advocate for gender equality and the empowerment of women and girls through education, capacity-building, leadership opportunities, and initiatives that address gender-based discrimination and violence.'},
+        {'title': 'Environmental Conservation and Sustainability', 'icon': '🌱', 'tag': 'Climate action', 'order': 5,
+         'description': 'We promote environmental stewardship through climate action, tree planting, waste management, environmental education, and sustainable practices that contribute to a greener future.'},
+        {'title': 'Digital Awareness', 'icon': '💻', 'tag': 'Digital safety & skills', 'order': 6,
+         'description': 'We equip young people with digital skills and knowledge to safely and effectively navigate the digital world, including digital literacy, online safety, emerging technologies, artificial intelligence, and digital career opportunities.'},
+        {'title': 'Education and Innovation', 'icon': '🔬', 'tag': 'STEM & creativity', 'order': 7,
+         'description': 'We foster quality education, creativity, innovation, STEM learning, research, and technology-driven solutions that empower young people to address community challenges and thrive in a rapidly changing world.'},
     ]
     for d in data:
-        Program.objects.get_or_create(title=d['title'], defaults=d)
+        defaults = d.copy()
+        title = defaults.pop('title')
+        Program.objects.update_or_create(title=title, defaults=defaults)
 
 
 def _seed_events():
@@ -181,7 +361,7 @@ def _seed_events():
         {
             'title': 'Youth Leadership Workshop',
             'description': 'A practical session helping students build confidence, communication skills, and community leadership habits.',
-            'venue': 'Arusha Community Hall',
+            'venue': 'Dar es Salaam Community Hall',
             'event_date': '2026-07-12',
             'event_time': '10:00',
             'order': 1,

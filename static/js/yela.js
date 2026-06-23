@@ -95,7 +95,7 @@ document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => 
 let aboutStatsRun = false;
 function animateAboutStats() {
   if (aboutStatsRun) return; aboutStatsRun = true;
-  const targets = [{ id: 'stat1', end: 800 }, { id: 'stat2', end: 6 }, { id: 'stat3', end: 48 }];
+  const targets = [{ id: 'stat1', end: 800 }, { id: 'stat2', end: 7 }, { id: 'stat3', end: 48 }];
   targets.forEach(({ id, end }) => {
     const el = document.getElementById(id);
     if (!el) return;

@@ -25,7 +25,7 @@ class StudentRegistrationForm(UserCreationForm):
     email = forms.EmailField(widget=forms.EmailInput(attrs={'placeholder': 'amina@example.com'}))
     phone = forms.CharField(max_length=40, widget=forms.TextInput(attrs={'placeholder': '+255 XXX XXX XXX'}))
     age = forms.IntegerField(required=False, min_value=10, max_value=35, widget=forms.NumberInput(attrs={'placeholder': '18'}))
-    location = forms.CharField(required=False, max_length=150, widget=forms.TextInput(attrs={'placeholder': 'Arusha'}))
+    location = forms.CharField(required=False, max_length=150, widget=forms.TextInput(attrs={'placeholder': 'Dar es Salaam, Tanzania'}))
     school_or_organization = forms.CharField(
         required=False,
         max_length=200,
@@ -35,6 +35,18 @@ class StudentRegistrationForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'email', 'username', 'phone', 'age', 'location', 'school_or_organization', 'password1', 'password2']
+
+    def clean_phone(self):
+        phone = ''.join(self.cleaned_data['phone'].split())
+        if phone.startswith('0'):
+            phone = '+255' + phone[1:]
+        elif phone.startswith('255'):
+            phone = '+' + phone
+
+        if not phone.startswith('+255'):
+            raise forms.ValidationError('Phone number must start with +255.')
+
+        return phone
 
     def save(self, commit=True):
         user = super().save(commit=False)
